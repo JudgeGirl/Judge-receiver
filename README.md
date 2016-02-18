@@ -35,6 +35,33 @@ root@supermicro:/home/butler# tree
 └── tiger.c
 ```
 
+編輯一下 `bashrc` 的環境，等下遠端過來操作沙盒時，需要直接當作指令執行 butler 家目錄下編譯好的執行檔
+
+```
+root@supermicro:/home/butler# vim .bashrc
+```
+
+在 `.bashrc` 加入
+
+```
+export PATH=$HOME:$PATH
+```
+
+更新一下剛剛的設定
+
+```
+root@supermicro:/home/butler# source .bashrc
+```
+
+測試是否有成功，確定 `echo $PATH` 中出現 `/home/butler`。
+
+```
+root@supermicro:/home/butler# su butler
+butler@supermicro:~$ echo $PATH
+/home/butler:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+```
+
+
 ### 準備沙盒 ###
 
 1. 確定 server 上有 `cgroup` 功能，在某些舊 kernel 並沒有我們需要限制沙盒的功能。
