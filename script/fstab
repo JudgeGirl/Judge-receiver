@@ -5,7 +5,8 @@ dev/urandom
 dev/zero
 lib/
 lib64/
-sys/fs/cgroup/memory
+sys/fs/cgroup/memory/
 usr/bin/
 usr/lib/
 usr/share/
+proc/
