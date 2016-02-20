@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+import os
+
+os.system('mkdir -p /sandbox/sandbox/app')
+os.system('mkdir -p /sandbox/sandbox/ws')
+os.system('chown butler:butler /sandbox/sandbox/app')
+os.system('chown butler:butler /sandbox/sandbox/ws')
+os.system('chmod 777 /sandbox/sandbox/ws')
+
+with open('fstab') as fp:
+  for line in fp.readlines():
+    line = line[:-1]
+    os.system('mkdir -p /sandbox/' + os.path.dirname(line))
+    if line[-1] != '/':
+      os.system('touch /sandbox/' + line)

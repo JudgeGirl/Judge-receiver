@@ -1,11 +1,11 @@
-bin
+bin/
 dev/full
 dev/null
 dev/urandom
 dev/zero
-lib
-lib64
+lib/
+lib64/
 sys/fs/cgroup/memory
-usr/bin
-usr/lib
-usr/share
+usr/bin/
+usr/lib/
+usr/share/
