@@ -35,7 +35,7 @@ root@supermicro:/home/butler# tree
 └── tiger.c
 ```
 
-編輯一下 `bashrc` 的環境，等下遠端過來操作沙盒時，需要直接當作指令執行 butler 家目錄下編譯好的執行檔
+編輯一下 `.bashrc` 的環境，等下遠端過來操作沙盒時，需要直接當作指令執行 butler 家目錄下編譯好的執行檔
 
 ```
 root@supermicro:/home/butler# vim .bashrc
@@ -100,7 +100,7 @@ sandbox/
 └── usr
 ```
 
-* 確認 `sandbox/sandbox/app`、`sandbox/sandbox/ws` 的權限配置如下，權限皆為 butler。如果權限不對，執行 `$ chown butler:butler ws` 和 `$ chown butler:butler app` 解決此問題。
+* 確認 `sandbox/sandbox/app`、`sandbox/sandbox/ws` 的權限配置如下，uid 與 gid 皆為 butler。如果權限不對，執行 `$ chown butler:butler app ws` 解決此問題。
 
 ```
 root@supermicro:/sandbox/sandbox# ls -l
