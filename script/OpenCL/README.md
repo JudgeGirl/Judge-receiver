@@ -23,3 +23,9 @@ detect each 15 seconds
 * * * * * sleep 30; ./memusage.py >mem.log
 * * * * * sleep 45; ./memusage.py >mem.log
 ```
+
+### fstab ###
+
+```
+/etc/OpenCL
+```

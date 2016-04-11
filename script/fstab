@@ -10,3 +10,4 @@ usr/bin/
 usr/lib/
 usr/share/
 proc/
+etc/OpenCL/
