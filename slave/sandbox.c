@@ -109,6 +109,12 @@ int main(int argc,char *argv[]) {
 	assert(setuid(0)==0);
 	assert(setgid(0)==0);
 	assert(system("swapoff -a")==0);
+	{
+		struct sched_param param;
+		param.sched_priority = sched_get_priority_max(SCHED_FIFO);
+		assert(sched_setscheduler(0, SCHED_FIFO, &param) == 0);
+	}
+
 	slave=fork();
 	if(slave==0) {
 		char **args=malloc((argc+1)*sizeof(char*));
