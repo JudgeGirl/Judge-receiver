@@ -4,7 +4,7 @@ RM=rm -f
 .PHONY:	all clean
 all:	sandbox tiger
 sandbox:	sandbox.c config.h
-	$(CC) $(CFLAGS) -o $@ $< -lrt
+	$(CC) $(CFLAGS) -o $@ $< -static -lrt
 	sudo chown root:root sandbox
 	sudo chmod +s sandbox
 tiger:	tiger.c config.h
