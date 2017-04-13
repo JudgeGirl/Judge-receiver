@@ -1,19 +1,30 @@
 CC=gcc
-CFLAGS=-std=c99 -O2
+CFLAGS=-std=c99 -O2 -Wall
 RM=rm -f
+TARGETS=sandbox sandbox-ex tiger
+
 .PHONY:	all clean
-all:	sandbox tiger
-sandbox:	sandbox.c config.h
-	$(CC) $(CFLAGS) -o $@ $< -static -lrt
+
+all: $(TARGETS)
+
+sandbox: ./src/sandbox.c ./include/config.h
+	$(CC) $(CFLAGS) -Iinclude -o $@ $< -static -lrt
 	sudo chown root:root sandbox
 	sudo chmod +s sandbox
-tiger:	tiger.c config.h
-	$(CC) $(CFLAGS) -o $@ $< -static -s
-clean:
-	$(RM) sandbox tiger hello
 
-test: hello.c sandbox
-	gcc hello.c -o hello
+sandbox-ex: ./src/sandbox-ex.c ./include/config.h
+	$(CC) $(CFLAGS) -Iinclude -o $@ $< -static -lrt
+	sudo chown root:root $@
+	sudo chmod +s $@
+
+tiger: ./src/tiger.c ./include/config.h
+	$(CC) $(CFLAGS) -Iinclude -o $@ $< -static -s
+
+clean:
+	$(RM) $(TARGETS)
+
+hello: ./src/hello.c sandbox
+	gcc ./src/hello.c -o hello
 	cd ../scripts && sudo ./prepare && sudo ./mount
 	sudo cp hello /sandbox/sandbox/app
 	./sandbox 10 16777216 ../app/hello
