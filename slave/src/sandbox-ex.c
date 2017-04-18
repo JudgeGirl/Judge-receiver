@@ -75,10 +75,10 @@ static void do_master(int TL,long long ML) {
 	} else if (TLE) {
 		fputs("TLE\n", fp);
 	} else if (!WIFEXITED(status)||WEXITSTATUS(status)!=0) {
-		if( !WIFEXITED(status) ) 
+		if (!WIFEXITED(status)) 
 			assert(system("echo \"ERROR: 1\" > ~/log;") == 0);
 		else 
-			assert(system("echo \"ERROR: 2\" > ~/log;;") == 0);
+			assert(system("echo \"ERROR: 2\" > ~/log;") == 0);
 		fputs("RE\n",fp);
 	} else {
 		fputs("OK\n",fp);

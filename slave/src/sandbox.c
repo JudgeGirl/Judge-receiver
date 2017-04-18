@@ -61,16 +61,18 @@ static void do_master(int TL,long long ML) {
 	assert(fscanf(fp,"%lld",&m)==1);
 	assert(fclose(fp)==0);
 	fp=fopen(SLAVE_LOG,"w");
-	system("echo \"OPEN SLAVE w\" > ~/log");
+	assert(system("echo \"OPEN SLAVE w\" > ~/log") == 0);
 	assert(fp!=NULL);
-	system("echo \":OK\n\" > ~/log");
+	assert(system("echo \":OK\n\" > ~/log") == 0);
 	if(MLE) {
 		fputs("MLE\n",fp);
 	} else if(TLE) {
 		fputs("TLE\n",fp);
 	} else if(!WIFEXITED(status)||WEXITSTATUS(status)!=0) {
-		if( !WIFEXITED(status) ) system("echo \"ERROR: 1\" > ~/log;");
-		else system("echo \"ERROR: 2\" > ~/log;;");
+		if (!WIFEXITED(status))
+			assert(system("echo \"ERROR: 1\" > ~/log;") == 0);
+		else 
+			assert(system("echo \"ERROR: 2\" > ~/log;") == 0);
 		fputs("RE\n",fp);
 	} else {
 		fputs("OK\n",fp);
