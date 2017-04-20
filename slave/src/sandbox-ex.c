@@ -111,6 +111,12 @@ static void do_slave(char *argv[], int PL) {
 		rlim.rlim_cur = rlim.rlim_max;
 		assert(setrlimit(RLIMIT_NPROC, &rlim)==0);
 	}
+	/* -- set lower priority than the master process, but higher than other process -- */
+	{
+		struct sched_param param;
+		param.sched_priority = sched_get_priority_max(SCHED_FIFO)-1;
+		assert(sched_setscheduler(0, SCHED_FIFO, &param) == 0);
+	}
 
 	assert(raise(SIGSTOP) == 0);
 	assert(execvp(argv[0], argv) != -1 && 0);
