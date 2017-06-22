@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+import binascii
+import os
+import subprocess
+import sys
+
+def recv():
+	n = int(sys.stdin.read(10))
+	if n <= 0: return -n
+	b = binascii.unhexlify(sys.stdin.read(n).encode())
+	with open('butler.tgz', 'wb') as fp: fp.write(b)
+	assert os.system('tar xf butler.tgz') == 0
+	return True
+
+def main():
+	if len(sys.argv) == 2:
+		fn = sys.argv[1]
+		sys.stdout.write('%2d' % len(fn))
+		sys.stdout.write(fn)
+		sys.stdout.flush()
+		assert recv() is True
+	else:
+		assert os.system('rm -fr /run/shm/slave') == 0
+		os.mkdir('/run/shm/slave')
+		os.chdir('/run/shm/slave')
+		while True:
+			lid = recv()
+			if lid is not True: break
+		assert os.system('./judge %d' % lid) == 0
+		assert os.system('rm -fr /sandbox/sandbox/app/*') == 0
+		assert os.system('rm -fr /sandbox/sandbox/ws') == 0
+		assert os.system('mkdir -p /sandbox/sandbox/ws') == 0
+
+if __name__ == '__main__': main()
