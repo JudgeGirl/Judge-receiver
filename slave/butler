@@ -28,5 +28,6 @@ def main():
 			if lid is not True: break
 		assert os.system('./judge %d' % lid) == 0
 		assert os.system('rm -fr /sandbox/sandbox/app/*') == 0
+		assert os.system('find /sandbox/sandbox/ws/* -name "*" -exec rm -rf {} \;') == 0
 
 if __name__ == '__main__': main()
