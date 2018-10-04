@@ -165,7 +165,7 @@ int main(int argc, char *argv[]) {
 						assert(sscanf(argv[++i], "%d", &TL) == 1 && "Time Limited Error");
 						break;
 					case 1:
-						assert(sscanf(argv[++i], "%lld", &ML) == 1 && "Time Limited Error");
+						assert(sscanf(argv[++i], "%lld", &ML) == 1 && "Memory Limited Error");
 						break;
 					case 2:
 						assert(sscanf(argv[++i], "%d", &PL) == 1 && "Thread Limited Error");
